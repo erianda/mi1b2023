@@ -16,8 +16,10 @@ public class HelloWorld {
     public static void main(String[] args) {
         int x= 34;
         String nama = "Aldo";
+        String pekerjaan = "Dosen";
         System.out.println("Nama saya "+nama);
         System.out.println("Umur saya "+x+" tahun");
+        System.out.println("Pekerjaan : "+pekerjaan);
     }
     
 }
