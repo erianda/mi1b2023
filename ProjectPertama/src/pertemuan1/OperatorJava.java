@@ -24,6 +24,25 @@ public class OperatorJava {
                 System.out.println("Anak ayam turun " +anakAyam+" mati satu tinggal ");
             }
         }
+        /*Tugas
+        1. Buatlah code java dengan output sebagai berikut
+                    *
+                   ***
+                  *****
+        2.Buatlah code java dengan ouput sebagai berikut
+        ABCDE
+        ABCD
+        ABC
+        AB
+        A
+        
+        3. Buatlah code java dengan output sebagai berikut
+        diketahui, Ada dua pekerja dengan nama Andri dan Budi, Gaji Andri 10 jt, dan gaji Budi 5 juta.
+        Pajak untuk gaji diatas 6juta sebesar 3% dan dibawah 6 juta sebesar 2%
+        Tentukan berapa gaji bersih andri dan budi
+        
+        */
+        
     }
     
 }
