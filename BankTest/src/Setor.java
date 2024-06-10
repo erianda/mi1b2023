@@ -3,6 +3,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,11 +22,15 @@ import javax.swing.JOptionPane;
 public class Setor extends javax.swing.JFrame {
 
     int balance;
+    public String noRekeningNasabah;
+
+    
     
     /**
      * Creates new form Setor
      */
     public Setor() {
+        
         try {
             initComponents();
             File myObj = new File("filename.txt");
@@ -100,25 +107,45 @@ public class Setor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FileWriter myWriter = null;
-        try {
-            // TODO add your handling code here:
-            JOptionPane.showMessageDialog(rootPane, "Saldo anda telah masuk");
-            balance = Integer.parseInt(jTextField1.getText()) + balance;
-            jLabel2.setText("Saldo saat ini : " + balance);
-            myWriter = new FileWriter("filename.txt");
-            myWriter.write(String.valueOf(balance));
+        
+        
+        
+        
+        
+        
+        try {                                         
+            KoneksiDB koneksi = new KoneksiDB();
+            Connection con = koneksi.getKoneksi();
+            Statement stm = con.createStatement();
             
-           myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException ex) {
-            Logger.getLogger(Setor.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+            String query1 = "INSERT INTO setoran (norekening, jumlah) "
+                + "VALUES ('"+noRekeningNasabah+"','"+jTextField1.getText()+"')";
+            stm.executeUpdate(query1); 
+            
+            FileWriter myWriter = null;
             try {
+                // TODO add your handling code here:
+                JOptionPane.showMessageDialog(rootPane, "Saldo anda telah masuk");
+                balance = Integer.parseInt(jTextField1.getText()) + balance;
+                jLabel2.setText("Saldo saat ini : " + balance);
+                myWriter = new FileWriter("filename.txt");
+                myWriter.write(String.valueOf(balance));
+                
                 myWriter.close();
+                System.out.println("Successfully wrote to the file.");
             } catch (IOException ex) {
                 Logger.getLogger(Setor.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    myWriter.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Setor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Setor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Setor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
